@@ -4,19 +4,15 @@
 const beats = [
   {
     title: "Groovy",
-    bpm: 90,
+    bpm: 154,
     url: "https://yngtaiyo.s3.eu-north-1.amazonaws.com/groovy.wav",
   },
   {
     title: "Hitoyobashi",
-    bpm: 75,
+    bpm: 105,
     url: "https://yngtaiyo.s3.eu-north-1.amazonaws.com/hitoyobashi.wav",
   },
-  {
-    title: "Trap Beat",
-    bpm: 140,
-    url: "https://yngtaiyo.s3.eu-north-1.amazonaws.com/trapbeat.wav",
-  },
+  
 ];
 
 // Lease options with prices
