@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YNG TAIYO</title>
+  <style>
+    /* Your existing CSS styles here (unchanged) */
+    @font-face {
+      font-family: 'HelpMe';
+      src: url('HelpMe.ttf') format('truetype');
+    }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background: black; color: white;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+    .custom-font { font-family: 'HelpMe', Arial, sans-serif; }
+    .intro {
+      height: 100vh;
+      background: url('websitebackground.gif') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-direction: column;
+    }
+    nav.nav {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      display: flex;
+      gap: 20px;
+      font-family: 'HelpMe', Arial, sans-serif;
+    }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      background: rgba(0,0,0,0.4);
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .nav a:hover { background: rgba(255,255,255,0.2); }
+    .main-content {
+      padding: 4rem 2rem 6rem;
+      font-family: 'HelpMe', Arial, sans-serif;
+    }
+    table {
+      width: 100%; border-collapse: collapse; background: #111;
+      font-family: 'HelpMe', Arial, sans-serif;
+    }
+    th, td {
+      padding: 12px; border: 1px solid #444; text-align: center;
+    }
+    th { background: #222; }
+    select, button {
+      padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer;
+    }
+    select { background: #222; color: white; }
+    button {
+      background: #E1306C; color: white; transition: background 0.3s;
+    }
+    button:hover { background: #c72b5f; }
+    .instagram-btn {
+      background-color: #833AB4; color: white; padding: 8px 16px;
+      border-radius: 6px; font-weight: bold; text-decoration: none;
+      display: inline-block; transition: background-color 0.3s ease;
+    }
+    .instagram-btn:hover { background-color: #6a278f; }
+    #audioControls {
+      position: fixed; bottom: 0; left: 0; width: 100%;
+      background: #111; border-top: 2px solid #444;
+      display: flex; align-items: center; padding: 10px 20px; gap: 15px;
+      box-sizing: border-box; z-index: 1000;
+      font-family: 'HelpMe', Arial, sans-serif;
+    }
+    #audioControls button,
+    #audioControls input[type="range"] { cursor: pointer; }
+    #audioControls button {
+      background: #222; color: white; padding: 8px 16px;
+      border-radius: 4px; transition: background 0.3s;
+    }
+    #audioControls button:hover { background: #444; }
+    #audioControls label { color: white; user-select: none; }
+    #audioControls input[type="range"] {
+      -webkit-appearance: none; width: 120px; height: 5px;
+      background: #444; border-radius: 5px; outline: none;
+    }
+    #audioControls input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 15px; height: 15px;
+      background: #E1306C; border-radius: 50%; border: none;
+      margin-top: -5px;
+    }
+    #audioControls input[type="range"]::-moz-range-thumb {
+      width: 15px; height: 15px;
+      background: #E1306C; border-radius: 50%; border: none;
+    }
+    #waveformCanvas {
+      flex-grow: 1; height: 50px; background: #000; border-radius: 4px;
+    }
+    #cartItems {
+      margin-top: 1rem; background: #222; padding: 1rem; border-radius: 6px;
+      max-width: 600px;
+    }
+    #cartItems ul {
+      list-style: none; padding: 0; margin: 0 0 1rem;
+    }
+    #cartItems li {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; border-bottom: 1px solid #444;
+    }
+    #cartItems li:last-child { border-bottom: none; }
+    #cartTotal { font-weight: bold; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <nav class="nav" aria-label="Main Navigation">
+      <a href="#beats">Beats</a>
+      <a href="#contact">Contact</a>
+      <a href="#cart">Cart</a>
+    </nav>
+    <img src="3dgifmaker26321.gif" alt="YNG TAIYO animated logo">
+  </header>
+
+  <section id="beats" class="main-content" aria-labelledby="beats-heading">
+    <h1 id="beats-heading" class="custom-font">
+      <img src="3dgifmaker50122.gif" alt="YNG TAIYO logo">
+    </h1>
+    <table id="beatsTable">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">BPM</th>
+          <th scope="col">Lease</th>
+          <th scope="col">Play</th>
+          <th scope="col">Add to Cart</th>
+        </tr>
+      </thead>
+      <tbody><!-- Populated by script.js --></tbody>
+    </table>
+  </section>
+
+  <section id="contact" class="main-content" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="custom-font">Contact</h2>
+    <p>Email: <a href="mailto:yngtaiyo@gmail.com" style="color:white;">yngtaiyo@gmail.com</a></p>
+    <a href="https://instagram.com/yngtaiyo" target="_blank" rel="noopener noreferrer" class="instagram-btn">
+      Instagram
+    </a>
+  </section>
+
+  <section id="cart" class="main-content" aria-labelledby="cart-heading">
+    <h2 id="cart-heading" class="custom-font">Cart</h2>
+    <div id="cartItems">
+      <p id="emptyCartMessage">Your cart is empty.</p>
+      <ul id="cartList"></ul>
+      <div id="cartTotal"></div>
+      <div id="paypal-button-container"></div>
+    </div>
+  </section>
+
+  <div id="audioControls" role="region" aria-label="Audio Player Controls">
+    <button id="playPauseBtn" type="button" aria-pressed="false">Play</button>
+    <label for="volumeSlider">Volume:</label>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" />
+    <canvas id="waveformCanvas" aria-hidden="true"></canvas>
+  </div>
+
+  <!-- Link to external JS -->
+  <!-- PayPal SDK (without defer) -->
+<script src="https://www.paypal.com/sdk/js?client-id=Ad9Uf5Ldzhn_vnoIDjhCq5GMEGWz3nkOL0M3-ft2ysSqgPpc9oVlpnubOsazaqerZFQQEiqdQE3RJWbd"></script>
+
+<!-- Your script.js (deferred) -->
+<script src="script.js" defer></script>
+</body>
+</html>
