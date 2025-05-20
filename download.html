@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download Your Beats</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2em; }
+    h1 { margin-bottom: 1em; }
+    .file-list { margin-top: 1em; }
+    button { margin: 0.5em 0; display: block; }
+  </style>
+</head>
+<body>
+  <h1>🎧 Thank You for Your Purchase!</h1>
+  <p>You can download your beats and licenses below:</p>
+  <div id="downloads" class="file-list"></div>
+
+  <script>
+    const downloadsDiv = document.getElementById("downloads");
+
+    // Load purchased items from localStorage
+    const items = JSON.parse(localStorage.getItem("purchasedItems") || "[]");
+    const beatSet = new Set();
+    const leaseSet = new Set();
+
+    items.forEach(item => {
+      beatSet.add(item.url); // Add beat file
+      leaseSet.add(item.lease); // Track license types
+    });
+
+    // License files map
+    const LICENSE_PDFS = {
+      Standard: "https://yngtaiyo.s3.eu-north-1.amazonaws.com/YNG%20TAIYO%20Standard%20Beat%20Lease%20License%20Agreement.pdf",
+      Premium: "https://yngtaiyo.s3.eu-north-1.amazonaws.com/YNG%20TAIYO%20Premium%20Beat%20Lease%20License%20Agreement.pdf",
+      Exclusive: "https://yngtaiyo.s3.eu-north-1.amazonaws.com/YNG%20TAIYO%20Exclusive%20Beat%20Lease%20License%20Agreement.pdf"
+    };
+
+    // Add license download buttons
+    leaseSet.forEach(lease => {
+      const btn = document.createElement("button");
+      btn.textContent = `Download ${lease} License Agreement (PDF)`;
+      btn.onclick = () => window.open(LICENSE_PDFS[lease], "_blank");
+      downloadsDiv.appendChild(btn);
+    });
+
+    // Add beat file download buttons
+    beatSet.forEach(url => {
+      const btn = document.createElement("button");
+      const fileName = url.split("/").pop();
+      btn.textContent = `Download ${fileName}`;
+      btn.onclick = () => window.open(url, "_blank");
+      downloadsDiv.appendChild(btn);
+    });
+
+    // Optional: clear localStorage so people don't see old orders
+    localStorage.removeItem("purchasedItems");
+  </script>
+</body>
+</html>
